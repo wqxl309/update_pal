@@ -95,12 +95,15 @@ def updatePal(palPath=None):
         newStockip.to_csv( os.path.join(tempFilePath,'stockip.csv'),index=False,header=False )
     else:
         pd.DataFrame([]).to_csv(os.path.join(tempFilePath, 'stockip.csv'), index=False, header=False)
-    allSecNames = pd.DataFrame(w.wss(stockNames,'sec_name').Data[0])
+    newStkcdsGm = ['.'.join([stk[-2:]+'SE',stk[:6]]) for stk in newStkcdsWind]
+    allStkcdsGM = savedStkcdsGM + newStkcdsGm     # 全体股票包含已退市 与pal行数相同
+    # allSecNames = pd.DataFrame(w.wss(stockNames,'sec_name').Data[0])
+    allInstruments = md.get_instruments('SZSE', 1, 0) + md.get_instruments('SHSE', 1, 0)
+    allInstrumentsDF = pd.DataFrame([[inds.symbol, inds.sec_name] for inds in allInstruments],columns=['symbol','sec_name']).set_index('symbol')
+    allSecNames = allInstrumentsDF.loc[allStkcdsGM,'sec_name']
     allSecNames.to_csv( os.path.join(tempFilePath, 'sec_names.csv'), index=False, header=False )
 
     # update trade info
-    newStkcdsGm = ['.'.join([stk[-2:]+'SE',stk[:6]]) for stk in newStkcdsWind]
-    allStkcdsGM = savedStkcdsGM + newStkcdsGm     # 全体股票包含已退市 与pal行数相同
     pages = ['date','open','high','low','close','volume','amount','pctchg','flow_a_share','total_share','adjfct','adjprc','isst']
     newPal = {}
     for page in pages:
@@ -151,6 +154,9 @@ def updatePal(palPath=None):
         newPal['flow_a_share'].loc[stk, tdt] = bar.flow_a_share
         newPal['total_share'].loc[stk, tdt] = bar.total_share
 
+    isST = np.array([int('ST' in sn) for sn in allSecNames.values])
+    newPal['isst'] = pd.DataFrame(np.repeat(np.reshape(isST,(isST.shape[0],1)),len(betweenDays),axis=1), index=allStkcdsGM, columns=betweenDays)
+
     for page in newPal:
         newPal[page].to_csv(os.path.join(tempFilePath,'{}.csv'.format(page)),index=False,header=False )
 
@@ -158,7 +164,3 @@ def updatePal(palPath=None):
 
 if __name__=='__main__':
     updatePal()
-    # md.init('18201141877','Wqxl7309')
-    # d = md.get_share_index('SZSE.000001,SZSE.000002','2018-07-25','2018-07-30')
-    # for t in d:
-    #     print(t.symbol, t.pub_date)

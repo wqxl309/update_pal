@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08320ca1-8fce-4131-84ba-1ff0349bd470" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/updatePal.py" beforeDir="false" afterPath="$PROJECT_DIR$/updatePal.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +16,8 @@
       <file leaf-file-name="updatePal.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/updatePal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="136" column="131" selection-start-line="136" selection-start-column="131" selection-end-line="136" selection-end-column="131" />
+            <state relative-caret-position="308">
+              <caret line="151" column="26" lean-forward="true" selection-start-line="151" selection-start-column="26" selection-end-line="151" selection-end-column="26" />
               <folding>
                 <element signature="e#14#23#0" expanded="true" />
               </folding>
@@ -133,12 +132,12 @@
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16859852" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26327193" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.24377032" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4127844" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3618635" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -154,68 +153,60 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="36" />
+      <option name="time" value="43" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
       <expression>
-        <expression-string>idxArray = np.array([betweenDaysNumber,
-                             [bar.open for bar in bars],
-                             [bar.high for bar in bars],
-                             [bar.low for bar in bars],
-                             [bar.close for bar in bars],
-                             [bar.volume for bar in bars],
-                             [bar.amount for bar in bars],
-                             idxret
-                             ])</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>lastBar.close * (1 + newPal['pctchg'].loc[stk, tdt]) / bar.close</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>lastPal</expression-string>
+        <expression-string>newPal['pctchg']</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>lastPal.loc[15, stk]</expression-string>
+        <expression-string>newPal['isst']</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>lastBar.close</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>newPal['adjprc'].shape</expression-string>
+        <expression-string>np.repeat(np.reshape(isST,(isST.shape[0],1)),len(betweenDays),axis=1)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>newPal['adjprc']</expression-string>
+        <expression-string>np.reshape(isST,(isST.shape[0],1))</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>newPal['adjprc'] = newPal['adjfct']*newPal['close']</expression-string>
+        <expression-string>np.repeat(np.reshape(isST,(isST.shape[0],1)),(1,len(betweenDays)))</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.any(newPal['adjfct'].values==0)</expression-string>
+        <expression-string>np.repeat(np.reshape(isST,(isST.shape[0],1)),1,len(betweenDays))</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>newPal['adjfct']</expression-string>
+        <expression-string>np.reshape(isST,isST.shape[0],1)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -246,6 +237,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://D:/Anaconda36/Lib/site-packages/pandas/core/generic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="2743" selection-start-line="2743" selection-end-line="2743" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://D:/Anaconda36/Lib/site-packages/pandas/core/indexing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -255,8 +253,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/updatePal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="136" column="131" selection-start-line="136" selection-start-column="131" selection-end-line="136" selection-end-column="131" />
+        <state relative-caret-position="308">
+          <caret line="151" column="26" lean-forward="true" selection-start-line="151" selection-start-column="26" selection-end-line="151" selection-end-column="26" />
           <folding>
             <element signature="e#14#23#0" expanded="true" />
           </folding>
