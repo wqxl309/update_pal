@@ -102,6 +102,7 @@ def updatePal(palPath=None):
     allInstrumentsDF = pd.DataFrame([[inds.symbol, inds.sec_name] for inds in allInstruments],columns=['symbol','sec_name']).set_index('symbol')
     allSecNames = allInstrumentsDF.loc[allStkcdsGM,'sec_name']
     allSecNames.to_csv( os.path.join(tempFilePath, 'sec_names.csv'), index=False, header=False )
+    pd.DataFrame(newStkcdsWind).to_csv( os.path.join(tempFilePath, 'stockname.csv'), index=False, header=False )
 
     # update trade info
     pages = ['date','open','high','low','close','volume','amount','pctchg','flow_a_share','total_share','adjfct','adjprc','isst']
@@ -160,7 +161,7 @@ def updatePal(palPath=None):
     for page in newPal:
         newPal[page].to_csv(os.path.join(tempFilePath,'{}.csv'.format(page)),index=False,header=False )
 
-    print('Pal temp files update finished with {} seconds'.format(time.time() - start))
+    print('Pal temp files update finished with {0} stocks and {1} days in {2} seconds '.format(len(newStkcdsWind),len(betweenDays),time.time() - start))
 
 if __name__=='__main__':
     updatePal()
